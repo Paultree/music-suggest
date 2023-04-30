@@ -20,7 +20,7 @@ const getToken = async (): Promise<string> => {
 
   return data.access_token;
 };
-const getRandomSong = async (): Promise<Spotify> => {
+const getRandomSong = async (genre: string): Promise<Spotify> => {
   const accessToken = await getToken();
   // get request authToken
   const parameters: Parameter = {
@@ -37,12 +37,14 @@ const getRandomSong = async (): Promise<Spotify> => {
   //gets a random song name number
   const songName: string = await getSongName(query, songNameNumber);
   //gets a random page number
-  const randomOffset: number = getRandomNumberWithLimit(1000);
+  const randomOffset: number = getRandomNumberWithLimit(200);
   //fetches track data based on offset and song name
-  const result: any = await fetch(
-    `https://api.spotify.com/v1/search?query=${songName}&type=track&offset=${randomOffset}&limit=50`,
-    parameters as any
-  ).catch((error) => {
+  const link: any =
+    `https://api.spotify.com/v1/search?q=${songName}%20` +
+    (genre != "reset" ? `genre:${genre}` : genre == "reset" ? "" : "") +
+    `&type=track&offset=${randomOffset}&limit=50`;
+  const result: any = await fetch(link, parameters as any).catch((error) => {
+    //hides error logs
     const mute = error;
   });
 
@@ -54,7 +56,7 @@ const getRandomSong = async (): Promise<Spotify> => {
   const dataIndex: number = getRandomNumberWithLimit(49.9);
   const songData: Spotify = data.tracks.items[dataIndex];
   //if songdata is undefined or doesn't exist, does the function again - recursion?
-  return songData ? songData : getRandomSong();
+  return songData ? songData : getRandomSong(genre);
 };
 
 const artistNames = (artists: any) => {
@@ -83,8 +85,8 @@ const transformSpotifyData = (spotifyData: Spotify): Song[] => {
   });
 };
 
-export const getSongData = async (): Promise<Song> => {
-  const spotifyData: Spotify = await getRandomSong();
+export const getSongData = async (genre: string): Promise<Song> => {
+  const spotifyData: Spotify = await getRandomSong(genre);
   const songData: Song[] = transformSpotifyData(spotifyData);
   const song = songData[0];
   return song;

@@ -16,7 +16,7 @@ const AudioButton = ({ preview }: any) => {
   };
   return (
     <>
-      <button onClick={playPause}>{isPlaying ? "Preview" : "Play"}</button>
+      <button onClick={playPause}>{!isPlaying ? "Preview" : "Pause"}</button>
     </>
   );
 };

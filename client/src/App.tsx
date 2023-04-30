@@ -4,17 +4,25 @@ import styles from "./App.module.scss";
 import { useQuery } from "react-query";
 import SongCard from "./components/SongCard/SongCard";
 import { Song } from "./services/interface";
+import { genres } from "./services/genres";
+import { useState } from "react";
 
 function App() {
   //useState to update what query function is used.
+  const [songGenre, setSongGenre] = useState("");
+
   const { data, refetch, isRefetching, isLoading, error, isError } = useQuery<
     Song,
     Error
-  >("song", getSongData, {
+  >("song", () => getSongData(songGenre), {
     staleTime: Infinity,
     cacheTime: Infinity,
     enabled: false,
   });
+
+  const changeGenre = (genre: string) => {
+    setSongGenre(genre);
+  };
 
   return (
     <div className={styles.App}>
@@ -35,6 +43,18 @@ function App() {
       </section>
       <section>
         <Button handleClick={refetch} string={"Go!"} />
+      </section>
+      <section className={styles.App_Genres}>
+        {genres.map((genre: any, index: number) => {
+          return (
+            <Button
+              key={index}
+              handleClick={() => changeGenre(genre)}
+              string={genre}
+              genre={songGenre}
+            />
+          );
+        })}
       </section>
     </div>
   );

@@ -12,4 +12,12 @@
   &_Body {
     height: 50vh;
   }
+  &_Genres {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2.5rem auto;
+  }
 }

@@ -40,6 +40,17 @@ Purpose of project is to learn how to use Spotify Web API and learn machine lear
 - Can see song image, track name, artist name, album and release date, duration.
   - Can press a button that plays a preview of track
   - Can press a button that redirects user to spotify page of track for full listen.
+- filter genres:
+  - pop
+  - rock
+  - rap
+  - hip hop
+  - edm
+  - k-pop
+  - r & b
+  - jazz
+  - indie
+- can reset filter
 
 # Known Issues
 
