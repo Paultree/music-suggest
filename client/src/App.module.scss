@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+  width: 100%;
+  &_Header {
+    &_Title {
+      margin-bottom: 0;
+    }
+    &_SubTitle {
+      margin-top: 0;
+    }
+  }
+  &_Body {
+    height: 50vh;
+  }
+}

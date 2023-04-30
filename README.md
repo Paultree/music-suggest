@@ -32,12 +32,19 @@ Purpose of project is to learn how to use Spotify Web API and learn machine lear
   - Will use all the artists the user has liked
   - A function that randomises between artist and genre will be used.
   - Search query that searches songs based on artist or genre.
+- To make react-query work with my button, used these parameters in order to disable the automatic fetching: staleTime: Infinity, cacheTime: Infinity, enabled: false
 
 # Features
 
 - Can search a random song
+- Can see song image, track name, artist name, album and release date, duration.
+  - Can press a button that plays a preview of track
+  - Can press a button that redirects user to spotify page of track for full listen.
 
 # Known Issues
+
+- 400 error thrown when data can't be fetched from Spotify. To overcome this, put in a catch block that hides the console log message.
+  - Logic of query function keeps trying different queries until a 200 response is made.
 
 # Future Goals
 

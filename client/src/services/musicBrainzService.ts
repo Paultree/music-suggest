@@ -3,13 +3,13 @@ export const getSongName = async (
   number: number
 ): Promise<any> => {
   const page: number = Math.floor(Math.random() * 100) + 1;
-  const result = await fetch(
+  const result: any = await fetch(
     `http://musicbrainz.org/ws/2/annotation/?query=${string}&fmt=json&limit=100&offset=${page}`
   );
 
-  const data = await result.json();
+  const data: any = await result.json();
 
-  const songName = data.annotations[number].name;
+  const songName: string = data.annotations[number].name;
 
   return songName.replace(" ", "+");
 };
